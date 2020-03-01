@@ -1,34 +1,18 @@
-pipeline{
-    agent{
-        label "node"
-    }
-    stages{
-        stage("A"){
-            steps{
-                echo "========executing A========"
+pipeline {
+    agent any
+    stages {
+        stage('Install dependencies')
+        steps {
+            sh "pip install -r requirements.txt > pip.log"
+        }
+        post {
+            success {
+                echo "dependencies install successfully"
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
+            failure {
+                echo "pip install failure"
+                sh "cat pip.log"
             }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
