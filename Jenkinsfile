@@ -41,10 +41,10 @@ pipeline {
                 }
             }
         }
-        stage('Merge into dev') {
+        stage('Merge into local Dev branch') {
             steps {
-                input('Merge into dev branch?')
-                echo "Merge into dev"
+                git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
+                sh "git merge ${env.BRANCH_NAME}"
             }
         }
         stage('Test dev branch') {
@@ -52,22 +52,22 @@ pipeline {
                 echo "Test dev branch"
             }
         }
-        stage('Merge into master') {
-            steps {
-                input('Merge into Master?')
-                echo "Merging into master branch"
-            }
-        }
-        stage('Test master branch') {
-            steps {
-                echo "Testing master branch"
-            }
-        }
-        stage('Deploy from Master') {
-            steps {
-                input('Deploy to Production?')
-                echo "Deploying to production"
-            }
-        }
+        // stage('Merge into master') {
+        //     steps {
+        //         input('Merge into Master?')
+        //         echo "Merging into master branch"
+        //     }
+        // }
+        // stage('Test master branch') {
+        //     steps {
+        //         echo "Testing master branch"
+        //     }
+        // }
+        // stage('Deploy from Master') {
+        //     steps {
+        //         input('Deploy to Production?')
+        //         echo "Deploying to production"
+        //     }
+        // }
     }
 }
