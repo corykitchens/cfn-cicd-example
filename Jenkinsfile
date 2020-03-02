@@ -46,7 +46,11 @@ pipeline {
         stage('Testing CFN') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh "taskcat test run"
+                    sh '''
+                    #!/bin/bash
+                    export PATH=./.local/bin:$PATH
+                    taskcat test run
+                    '''
                 }
             }
             post {
