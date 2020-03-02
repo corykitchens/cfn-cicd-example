@@ -6,7 +6,7 @@ tests:
   default:
     template: ./vm_portfolio.yaml
     regions:
-      - us-west-1
+      - us-west-2
     parameters:
       ProviderName: TestProviderName
       PortfolioName: TestPortfolioName
