@@ -10,6 +10,7 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
+                    pip3 install virtualenv
                     python3 -m virtualenv venv
                     ls -la
                     pip3 install -r requirements.txt
