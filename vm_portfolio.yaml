@@ -10,4 +10,4 @@ Resources:
     Type: AWS::ServiceCatalog::Portfolio
     Properties:
       DisplayName: !Ref PortfolioName
-      ProviderName: !Ref ProviderName
+      ProviderName: "HelloWorld"
