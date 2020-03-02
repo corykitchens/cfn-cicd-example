@@ -70,7 +70,7 @@ pipeline {
         }
         stage('Test dev branch') {
             steps {
-                echo "Test dev branch"
+                echo "Test dev branch "
             }
         }
         // stage('Merge into master') {
