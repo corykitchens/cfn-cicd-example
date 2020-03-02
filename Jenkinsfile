@@ -29,6 +29,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
                     #!/bin/bash
+                    export PATH=./.local/bin:$PATH
                     taskcat lint
                     '''
                 }
