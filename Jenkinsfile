@@ -29,7 +29,8 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
                     #!/bin/bash
-                    echo $(which taskcat)
+                    pip3 install --user taskcat
+                    which taskcat
                     taskcat
                     '''
                 }
