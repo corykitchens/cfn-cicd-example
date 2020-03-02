@@ -49,6 +49,7 @@ pipeline {
                     sh '''
                     #!/bin/bash
                     export PATH=./.local/bin:$PATH
+                    export AWS_REGION=us-west-2
                     taskcat test run
                     '''
                 }
