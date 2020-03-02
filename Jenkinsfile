@@ -12,7 +12,7 @@ pipeline {
                     sh '''
                     pip3 install virtualenv
                     python3 -m virtualenv venv
-                    ls -la
+                    source ./venv/bin/activate
                     pip3 install -r requirements.txt
                     '''
                 }
@@ -32,7 +32,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
                     #!/bin/bash
-                    
+                    echo $(which taskcat)
                     '''
                 }
             }
