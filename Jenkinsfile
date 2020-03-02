@@ -8,7 +8,12 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh "pip3 install -r requirements.txt > pip.log"
+                    sh '''
+                    #!/bin/bash
+                    pip3 install virtualenv
+                    ./virtualenv/bin/activate
+                    pip3 install -r requirements.txt > pip.log
+                    '''
                 }
             }
             post {
@@ -24,7 +29,12 @@ pipeline {
         stage('Lint CFN') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh "taskcat lint"
+                    sh '''
+                    #!/bin/bash
+                    which taskcat
+                    source venv/bin/activate
+                    which taskcat
+                    '''
                 }
             }
             post {
