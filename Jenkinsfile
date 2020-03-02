@@ -1,6 +1,7 @@
 pipeline {
     agent {
         docker {
+            
             image 'python:latest'
         }
     }
@@ -9,11 +10,8 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
-                    #!/bin/bash
-                    pip3 install virtualenv
-                    virtualenv venv
-                    ./venv/bin/activate
-                    pip3 install -r requirements.txt > pip.log
+                    printenv
+                    echo $PATH
                     '''
                 }
             }
