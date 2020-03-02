@@ -10,8 +10,9 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
-                    printenv
-                    echo $PATH
+                    python3 -m virtualenv venv
+                    ls -la
+                    pip3 install -r requirements.txt
                     '''
                 }
             }
@@ -30,9 +31,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
                     #!/bin/bash
-                    which taskcat
-                    source venv/bin/activate
-                    which taskcat
+                    
                     '''
                 }
             }
