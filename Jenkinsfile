@@ -1,9 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:latest'
+        }
+    }
     stages {
         stage('Install dependencies') {
             steps {
-                sh "pip3 install --user -r requirements.txt > pip.log"
+                sh "pip3 install -r requirements.txt > pip.log"
             }
             post {
                 success {
