@@ -23,7 +23,9 @@ pipeline {
         }
         stage('Lint CFN') {
             steps {
-                sh "taskcat lint"
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh "taskcat lint"
+                }
             }
             post {
                 success {
@@ -36,7 +38,9 @@ pipeline {
         }
         stage('Testing CFN') {
             steps {
-                sh "taskcat test run"
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh "taskcat test run"
+                }
             }
             post {
                 success {
