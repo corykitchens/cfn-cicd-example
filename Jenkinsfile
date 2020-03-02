@@ -11,7 +11,8 @@ pipeline {
                     sh '''
                     #!/bin/bash
                     pip3 install virtualenv
-                    ./virtualenv/bin/activate
+                    virtualenv venv
+                    ./venv/bin/activate
                     pip3 install -r requirements.txt > pip.log
                     '''
                 }
