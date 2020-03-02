@@ -1,0 +1,12 @@
+project:
+  name: my-service-catalog-portfolio
+  regions:
+    - us-west-2
+tests:
+  default:
+    template: ./vm_portfolio.yaml
+    regions:
+      - us-west-1
+    parameters:
+      ProviderName: TestProviderName
+      PortfolioName: TestPortfolioName

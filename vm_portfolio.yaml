@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Just some CFN
+Parameters:
+  PortfolioName:
+    Type: String
+  ProviderName:
+    Type: String
+Resources:
+  MyPortfolio:
+    Type: AWS::ServiceCatalog::Portfolio
+    Properties:
+      DisplayName: !Ref PortfolioName
+      ProviderName: !Ref ProviderName

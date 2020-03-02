@@ -15,29 +15,29 @@ pipeline {
                 }
             }
         }
-        stage('Run build') {
+        stage('Lint CFN') {
             steps {
-                echo "Do some building"
+                sh "taskcat lint"
             }
             post {
                 success {
-                    echo "Build success"
+                    echo "Lint complete"
                 }
                 failure {
-                    echo "Build failure"
+                    echo "Failure linting template"
                 }
             }
         }
-        stage('Run some testing') {
+        stage('Testing CFN') {
             steps {
-                echo "Do some testing"
+                sh "taskcat test run"
             }
             post {
                 success {
-                    echo "Testing successful"
+                    echo "Test success"
                 }
                 failure {
-                    echo "Testing failed"
+                    echo "Test failure"
                 }
             }
         }
