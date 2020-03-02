@@ -7,10 +7,12 @@ pipeline {
     stages {
         stage('Install dependencies') {
             steps {
-                sh "pip3 install virtualenv --user"
-                sh "python3 -m virtualenv venv"
-                sh "source ./venv/bin/activate"
-                sh "pip3 install -r requirements.txt > pip.log"
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh "pip3 install virtualenv --user"
+                    sh "python3 -m virtualenv venv"
+                    sh "source ./venv/bin/activate"
+                    sh "pip3 install -r requirements.txt > pip.log"
+                }
             }
             post {
                 success {
