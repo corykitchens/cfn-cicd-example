@@ -1,7 +1,6 @@
 pipeline {
     agent {
         docker {
-            
             image 'python:latest'
         }
     }
@@ -29,7 +28,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
                     #!/bin/bash
-                    pip3 install --user taskcat
+                    export PATH=./.local/bin:$PATH
                     which taskcat
                     taskcat
                     '''
