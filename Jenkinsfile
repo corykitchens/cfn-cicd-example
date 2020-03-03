@@ -78,7 +78,8 @@ pipeline {
                 sh "git merge ${env.BRANCH_NAME}"
                 sh "printenv"
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@cfn-cicd-example')
+                    echo "${GIT_USERNAME}"
+                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/corykitchens/cfn-cicd-example')
                 }
             }
         }
