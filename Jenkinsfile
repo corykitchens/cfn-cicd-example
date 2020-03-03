@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
-                    pip3 install -r requirements.txt
+                    # pip3 install -r requirements.txt
                     export PATH=./.local/bin:$PATH
                     '''
                 }
@@ -74,9 +74,7 @@ pipeline {
             }
             steps {
                 input('Merge feature branch into dev?')
-                git branch: 'dev', credentialsId: 'github', url: 'git@github.com:corykitchens/cfn-cicd-example'
-                echo "git branch"
-                echo "git remote -v"
+                git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 sshagent (credentials: ['github']) {
                     sh('git push git@github.com:corykitchens/cfn-cicd-example')
