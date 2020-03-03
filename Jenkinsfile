@@ -77,7 +77,7 @@ pipeline {
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 sshagent (credentials: ['github']) {
-                    sh('git push https://github.com/corykitchens/cfn-cicd-example')
+                    sh('git push ssh://github.com/corykitchens/cfn-cicd-example')
                 }
             }
         }
@@ -90,7 +90,7 @@ pipeline {
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 sshagent (credentials: ['github']) {
-                    sh('git push https://github.com/corykitchens/cfn-cicd-example')
+                    sh('git push ssh://github.com/corykitchens/cfn-cicd-example')
                 }
             }
         }
