@@ -63,44 +63,48 @@ pipeline {
                 }
             }
         }
-        stage('Merge into local Dev branch') {
+        stage('Merge Feature Branch into Dev') {
+            when {
+                not {
+                    anyOf {
+                        branch 'master'
+                        branch 'dev'
+                    }
+                }
+            }
             steps {
+                input('Merge feature branch into dev?')
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
-                sh '''
-                #!/bin/bash
-                export PATH=./.local/bin:$PATH
-                export AWS_REGION=us-west-2
-                taskcat test run
-                '''
-                input('Merge changes upstream to Dev?')
                 sh "git push origin dev"
             }
         }
-        stage('Merge into master') {
+        stage('Merge Dev into Master') {
+            when {
+                branch 'dev'
+            }
             steps {
+                input('Merge dev into master?')
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
-                sh "git merge dev"
-                sh '''
-                #!/bin/bash
-                export PATH=./.local/bin:$PATH
-                export AWS_REGION=us-west-2
-                taskcat test run
-                '''
-                input('Merge changes upstream to Master?')
+                sh "git merge ${env.BRANCH_NAME}"
                 sh "git push origin master"
             }
         }
         stage('Deploy from Master') {
+            when {
+                branch 'master'
+            }
             steps {
                 input('Deploy to Production?')
-                sh '''
-                #!/bin/bash
-                export PATH=./.local/bin:$PATH
-                export AWS_REGION=us-west-2
-                sam build
-                sam deploy
-                '''
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh '''
+                    #!/bin/bash
+                    export PATH=./.local/bin:$PATH
+                    export AWS_REGION=us-west-2
+                    sam build
+                    sam deploy
+                    '''
+                }
             }
         }
     }
