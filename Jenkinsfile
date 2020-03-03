@@ -78,7 +78,7 @@ pipeline {
                 echo "git branch"
                 sh "git merge ${env.BRANCH_NAME}"
                 sshagent (credentials: ['github']) {
-                    sh('git push git@https://github.com/corykitchens/cfn-cicd-example.git')
+                    sh('git push git@github.com/corykitchens/cfn-cicd-example.git')
                 }
             }
         }
