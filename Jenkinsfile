@@ -76,6 +76,8 @@ pipeline {
                 input('Merge feature branch into dev?')
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
+                sh "git branch"
+                sh "git remote -v"
                 sshagent (credentials: ['github']) {
                     sh('git push git@github.com:corykitchens/cfn-cicd-example')
                 }
