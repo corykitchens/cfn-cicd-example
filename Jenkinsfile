@@ -9,7 +9,7 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
-                    # pip3 install -r requirements.txt
+                    pip3 install -r requirements.txt
                     export PATH=./.local/bin:$PATH
                     '''
                 }
@@ -30,7 +30,7 @@ pipeline {
                     sh '''
                     #!/bin/bash
                     export PATH=./.local/bin:$PATH
-                    # taskcat lint
+                    taskcat lint
                     '''
                 }
             }
@@ -87,7 +87,7 @@ pipeline {
             }
             steps {
                 input('Merge dev into master?')
-                git branch: 'master', credentialsId: 'github', url: 'https://github.com/<USER_NAME>/<REPO_NAME>'
+                git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/corykitchens/cfn-cicd-example')
