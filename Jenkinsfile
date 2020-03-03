@@ -68,6 +68,7 @@ pipeline {
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 sh '''
+                #!/bin/bash
                 export PATH=./.local/bin:$PATH
                 export AWS_REGION=us-west-2
                 taskcat test run
@@ -81,6 +82,7 @@ pipeline {
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge dev"
                 sh '''
+                #!/bin/bash
                 export PATH=./.local/bin:$PATH
                 export AWS_REGION=us-west-2
                 taskcat test run
@@ -93,6 +95,7 @@ pipeline {
             steps {
                 input('Deploy to Production?')
                 sh '''
+                #!/bin/bash
                 export PATH=./.local/bin:$PATH
                 export AWS_REGION=us-west-2
                 sam build
