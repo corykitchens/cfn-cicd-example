@@ -76,7 +76,7 @@ pipeline {
                 input('Merge feature branch into dev?')
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
-                sh "printev"
+                sh "printenv"
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@cfn-cicd-example')
                 }
