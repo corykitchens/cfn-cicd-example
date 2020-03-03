@@ -76,7 +76,9 @@ pipeline {
                 input('Merge feature branch into dev?')
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
-                sh "git push origin dev"
+                sshagent (credentials: ['github']) {
+                    sh('git push https://github.com/corykitchens/cfn-cicd-example')
+                }
             }
         }
         stage('Merge Dev into Master') {
@@ -87,7 +89,9 @@ pipeline {
                 input('Merge dev into master?')
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
-                sh "git push origin master"
+                sshagent (credentials: ['github']) {
+                    sh('git push https://github.com/corykitchens/cfn-cicd-example')
+                }
             }
         }
         stage('Deploy from Master') {
