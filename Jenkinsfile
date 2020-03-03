@@ -67,28 +67,37 @@ pipeline {
             steps {
                 git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
-            }
-        }
-        stage('Test dev branch') {
-            steps {
-                echo "Test dev branch "
+                sh '''
+                export PATH=./.local/bin:$PATH
+                export AWS_REGION=us-west-2
+                taskcat test run
+                '''
+                input('Merge changes upstream to Dev?')
+                sh "git push origin dev"
             }
         }
         stage('Merge into master') {
             steps {
-                input('Merge into Master?')
-                echo "Merging into master branch"
-            }
-        }
-        stage('Test master branch') {
-            steps {
-                echo "Testing master branch"
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
+                sh "git merge dev"
+                sh '''
+                export PATH=./.local/bin:$PATH
+                export AWS_REGION=us-west-2
+                taskcat test run
+                '''
+                input('Merge changes upstream to Master?')
+                sh "git push origin master"
             }
         }
         stage('Deploy from Master') {
             steps {
                 input('Deploy to Production?')
-                echo "Deploying to production"
+                sh '''
+                export PATH=./.local/bin:$PATH
+                export AWS_REGION=us-west-2
+                sam build
+                sam deploy
+                '''
             }
         }
     }
