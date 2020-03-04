@@ -4,10 +4,6 @@ pipeline {
             image 'python:latest'
         }
     }
-    parameters {
-        string(name: 'bucket_name', defaultValue: 'mybucket', description: 'The name of the bucket to create')
-        string(name: 'id', description: 'The Unique ID')
-    }
     stages {
         stage('Install dependencies') {
             steps {
