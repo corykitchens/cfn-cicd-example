@@ -13,7 +13,6 @@ pipeline {
                     export PATH=./.local/bin:$PATH
                     '''
                 }
-                echo "${params.bucket_name}"
             }
             post {
                 success {
