@@ -11,3 +11,9 @@ Resources:
     Properties:
       DisplayName: !Ref PortfolioName
       ProviderName: !Ref ProviderName
+
+  MyOtherPortfolio:
+    Type: AWS::ServiceCatalog::Portfolio
+    Properties:
+      DisplayName: ThisIsMyDisplayName
+      ProviderName: ThisIsMyProvider
