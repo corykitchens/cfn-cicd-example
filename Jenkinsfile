@@ -105,8 +105,8 @@ pipeline {
                     #!/bin/bash
                     export PATH=./.local/bin:$PATH
                     export AWS_REGION=us-west-2
-                    sam build
-                    sam deploy -t vm_portfolio.yaml
+                    sam build -t vm_portfolio.yaml
+                    sam deploy
                     '''
                 }
             }
