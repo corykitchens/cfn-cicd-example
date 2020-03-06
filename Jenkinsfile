@@ -87,7 +87,7 @@ pipeline {
             }
             steps {
                 input('Merge dev into master?')
-                git branch: 'dev', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/corykitchens/cfn-cicd-example'
                 sh "git merge ${env.BRANCH_NAME}"
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/corykitchens/cfn-cicd-example')
