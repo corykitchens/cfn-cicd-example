@@ -8,3 +8,13 @@ s3_prefix = "CjkitcheMyCiCdStack"
 region = "us-west-2"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "PortfolioName=MyPortfolioCICD ProviderName=CoryKitchens"
+
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "CjkitcheMyCiCdStackDev"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1nsixfnbu9jym"
+s3_prefix = "CjkitcheMyCiCdStack"
+region = "us-west-2"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "PortfolioName=MyPortfolioCICD-Dev ProviderName=CoryKitchens-Dev"

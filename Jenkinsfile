@@ -4,9 +4,6 @@ pipeline {
             image 'python:latest'
         }
     }
-    parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-    }
     stages {
         stage('Install dependencies') {
             steps {
@@ -16,7 +13,6 @@ pipeline {
                     export PATH=./.local/bin:$PATH
                     '''
                 }
-                echo "${params.PERSON}"
             }
             post {
                 success {
