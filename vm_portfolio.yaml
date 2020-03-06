@@ -18,7 +18,7 @@ Resources:
       DisplayName: ThisIsMyDisplayName
       ProviderName: ThisIsMyProvider
 
-  MyOtherPortfolio:
+  MyOtherOtherPortfolio:
     Type: AWS::ServiceCatalog::Portfolio
     Properties:
       DisplayName: ThisIsMyDisplayNameV2
